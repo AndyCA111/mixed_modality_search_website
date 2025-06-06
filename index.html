@@ -241,9 +241,15 @@
       <div class="column is-full-width">
         <h2 class="title is-4">🛠️ Retrieval with Heterogeneous Corpus</h2>
         <div class="content has-text-justified">
-          <p>We begin with an ablated setting of mixed modality search: a heterogeneous corpus composed of unimodal documents (e.g., text-only or image-only (a)). This setting evaluates whether a retrieval model can effectively handle the challenge of cross-modal alignment.</p>
-          <center><img id="method" src="assets/figure_one_all.png" width="100%"/></center>
-          <p>We begin with an ablated setting of mixed modality search: a heterogeneous corpus composed of unimodal documents (e.g., text-only or image-only (a)). This setting evaluates whether a retrieval model can effectively handle the challenge of cross-modal alignment.</p>
+          <p>We begin with an ablated setting of mixed modality search: a heterogeneous corpus composed of unimodal documents (e.g., text-only or image-only). This setting evaluates whether a retrieval model can effectively handle the challenge of cross-modal alignment.</p>
+          <center><img id="method" src="assets/figure_two_new.png" width="100%"/></center>
+          <p>
+            <strong>(a) Dataset Construction:</strong> We construct a heterogeneous corpus by randomly replacing text documents with either screenshot renderings of the text or paired images with probability $p$. Since the semantic content remains unchanged, a retrieval system with perfect cross-modal alignment should maintain the same performance regardless of $p$.  
+            <strong>(b) Initial Results $\&$ Simulation:</strong> Surprisingly, CLIP exhibits a U-shaped performance curve as text is replaced with screenshots. We attribute this behavior to the modality gap in CLIP's embedding space. A simulation experiment that artificially penalizes cross-modal documents reproduces the same U-shaped trend, confirming our hypothesis.  
+            <strong>(c) Method — GR-CLIP:</strong> Building on prior work, we propose <strong>GR-CLIP</strong>, a simple post-hoc calibration that removes the modality gap via mean-centering of text and image embeddings.  
+            <strong>(d) Improved Results:</strong>  GR-CLIP flattens the U-shaped curve and significantly improves retrieval accuracy, achieving comparable or better performance than the VLM2Vec baseline with far less compute.  
+            <strong>(e) Generalization Across Models, Datasets, and Modalities:</strong> To evaluate generalization, we test GR-CLIP across three CLIP variants, three additional datasets, and three other modalities (detailed in the Appendix). In all cases, the findings and improvements hold consistently.} 
+          </p>
         </div>
       </div>
     </div>
@@ -257,21 +263,25 @@
         <!-- <div class="content has-text-justified">
           <p>xxx.</p>
         </div><br> -->
+        <p>We now consider another ablation to mixed modality search: the retrieval corpus is homogeneous, but each document is multimodal—containing both image and text modalities (a). This setup evaluates the model’s ability to fuse multimodal information, where image and text together should provide richer semantic cues than either modality alone.</p>
         <!-- <h3 class="title is-4">AutoConverter Framework and Results</h3> -->
         <div class="content has-text-justified">
           <center><img id="method" src="assets/figure_two_all.png" width="100%"/></center>
-          <p><em>
-            <strong>(a) Dataset Construction:</strong> Each document contains both image and text, and embeddings are obtained by fusing modality-specific features. We vary the fusion coefficient $\alpha$ to evaluate the model's ability to integrate multimodal information.<br>
+          <p>
+            <strong>(a) Dataset Construction:</strong> Each document contains both image and text, and embeddings are obtained by fusing modality-specific features. We vary the fusion coefficient $\alpha$ to evaluate the model's ability to integrate multimodal information.
             <strong>(b) Results:</strong> GR-CLIP consistently outperforms CLIP across three model variants and four datasets, demonstrating that the modality gap hinders effective multimodal fusion—and that removing it significantly enhances retrieval performance.
-          </em></p>
+          </p>
         </div><br>
 
         <h3 class="title is-4">MixBench: A new benchmark specifically designed for mixed modality search mirroring real-world search engine challenges</h3>
         <div class="content has-text-justified">
+          <p>Unifyig the findings from the above two settings and extend our analysis to the most realistic scenario: mixed modality search, where documents in the corpus may be purely text, purely image, or a combination of both (a). This setting mirrors real-world search engine challenges, where retrieval systems must operate over heterogeneous and variably multimodal content.</p>
           <center><img id="method" src="assets/figure_three_all.png" width="100%"/></center>
-          <p>Unifyig the findings from setting1 and setting2 and extend our analysis to the most realistic scenario: mixed modality search, where documents in the corpus may be purely text, purely image, or a combination of both (a). This setting mirrors real-world search engine challenges, where retrieval systems must operate over heterogeneous and variably multimodal content.</p>
-          <p>Across four MixBench subsets and five CLIP variants, GR-CLIP delivers substantial improvements over the original CLIP models by eliminating the modality gap, achieving state-of-the-art performance with significantly lower computational cost.</p>
-        </div><br>
+          <p>
+            <strong>(a) Dataset Construction:</strong> We introduce MixBench, a benchmark where the corpus is heterogeneous and includes multimodal documents, reflecting the most realistic setting for search engines.  
+            <strong>(b) Results:</strong> Across four MixBench subsets and five CLIP variants, GR-CLIP delivers substantial improvements over the original CLIP models by eliminating the modality gap, achieving state-of-the-art performance with significantly lower computational cost.
+          </p>
+        </div>
 
         <!-- <h3 class="title is-4">Qualitative Comparison of the Original Questions, Naive Baseline-Generated Questions, and AutoConverter-Generated Questions.</h3>
         <div class="content has-text-justified">
@@ -286,7 +296,6 @@
         
       </div>
     </div>
-    <br><br>
     <!--/ A -->
 
     <div class="columns is-centered">
@@ -303,13 +312,13 @@
             width="100%"
             height="560px"
           ></iframe>
-        </div><br>
+        </div>
 
         <h3 class="title is-4">📈 Evaluation of MixBench</h3>
         <div class="content has-text-justified">
           <p>Here are the running commands:</p>
           <div class="code-block">
-            <p>xxx: <code>python run.py</code></p>
+            <p>MixBench Evaluation: <code>python run.py</code></p>
           </div>
         </div><br>
       </div>
@@ -323,7 +332,7 @@
     <pre><code>@inproceedings{GR-CLIP,
   title={Closing the Modality Gap for Mixed Modality Search},
   author={Binxu Li and Yuhui Zhang and Xiaohan Wang and Weixin Liang and Ludwig Schmidt and Serena Yeung-Levy},
-  booktitle={NeurIPS 2025 Under Review},
+  booktitle={xxx},
   year={2025}
 }</code></pre>
   </div>
